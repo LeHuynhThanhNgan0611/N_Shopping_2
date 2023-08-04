@@ -1,8 +1,6 @@
-﻿@model PagedList.PagedList<WebOnl.Models.EF.News>
-@using PagedList.Mvc;
-@using PagedList;
+﻿@model IEnumerable<WebOnl.Models.EF.Posts>
 @{
-    ViewBag.Title = "Danh sách tin tức";
+    ViewBag.Title = "Bài viết";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -16,7 +14,7 @@
             <a href="/admin" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/news" class="nav-link">@ViewBag.Title</a>
+            <a href="/admin/category" class="nav-link">@ViewBag.Title</a>
         </li>
     </ul>
 }
@@ -25,7 +23,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Quản lý tin tức</h1>
+                <h1>Quản lý @ViewBag.Title</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -43,28 +41,14 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">@ViewBag.Title</h3>
+            <h3 class="card-title">Danh sách @ViewBag.Title</h3>
 
             <div class="card-tools">
-                <a href="/admin/news/add" class="btn btn-primary">Thêm mới</a>
+                <a href="/admin/posts/add" class="btn btn-primary">Thêm mới</a>
                 <a href="#" class="btn btn-danger" id="BtnDeleteAll">Xóa</a>
             </div>
         </div>
         <div class="card-body">
-            <div class="row">
-                <div class="col-6">
-                    @using (Html.BeginForm("index", "News", FormMethod.Get, new { }))
-                    {
-                        <div class="input-group input-group-sm">
-                            @Html.TextBox("Searchtext", null, new { @class = "form-control" })
-                            @*<input type="text" name="searchtext" class="form-control">*@
-                            <span class="input-group-append">
-                                <button type="submit" class="btn btn-info btn-flat">Tìm kiếm</button>
-                            </span>
-                        </div>
-                    }
-                </div>
-            </div>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -74,14 +58,14 @@
                         <th>Tiêu đề</th>
                         <th>Ngày tạo</th>
                         <th>Hiển thị</th>
-
-                        <th style="width:150px;"></th>
+                        <th>Thứ tự</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @if (Model != null && Model.Any())
                     {
-                        var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
+                        var i = 1;
                         foreach (var item in Model)
                         {
                             var strCheck = item.IsActive ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
@@ -95,7 +79,7 @@
                                     <a href='#' data-id="@item.Id" class="btnActive">@Html.Raw(strCheck)</a>
                                 </td>
                                 <td>
-                                    <a href="/admin/news/edit/@item.Id" class="btn btn-sm btn-primary">Sửa</a>
+                                    <a href="/admin/posts/edit/@item.Id" class="btn btn-sm btn-primary">Sửa</a>
                                     <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>
                                 </td>
                             </tr>
@@ -110,13 +94,6 @@
                     }
                 </tbody>
             </table>
-
-            <div class="row">
-                <div class="col-6"></div>
-                <div class="col-6" @*style="text-align:right;"*@>
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-                </div>
-            </div>
 
         </div>
         <!-- /.card-body -->
@@ -154,7 +131,7 @@
                     var conf = confirm('Bạn có muốn xóa các bản ghi này hay không?');
                     if (conf === true) {
                         $.ajax({
-                            url: '/admin/news/deleteAll',
+                            url: '/admin/posts/deleteAll',
                             type: 'POST',
                             data: { ids: str },
                             success: function (rs) {
@@ -179,13 +156,12 @@
                     }
                 });
             });
-
             $('body').on('click', '.btnDelete', function () {
                 var id = $(this).data("id");
                 var conf = confirm('Bạn có muốn xóa bản ghi này không?');
                 if (conf === true) {
                     $.ajax({
-                        url: '/Admin/News/Delete',
+                        url: '/admin/posts/delete',
                         type: 'POST',
                         data: { id: id },
                         success: function (rs) {
@@ -196,31 +172,29 @@
                     });
                 }
             });
-        });
 
-        $('body').on('click', '.btnActive', function (e) {
-            e.preventDefault();
-            var btn = $(this);
-            var id = btn.data("id");
-            $.ajax({
-                url: '/Admin/News/IsActive',
-                type: 'POST',
-                data: { id: id },
-                success: function (rs) {
-                    debugger;
-                    if (rs.success) {
-                        if (rs.isAcive) {
-                            btn.html("<i class='fa fa-check text-success'></i>");
-                            //$(this).find("i").removeClass("fas fa-times text-danger")
-                            //$(this).find("i").addClass("fa fa-check text-success");
-                        } else {
-                            btn.html("<i class='fas fa-times text-danger'></i>");
+            $('body').on('click', '.btnActive', function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                var id = btn.data("id");
+                $.ajax({
+                    url: '/admin/posts/IsActive',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            if (rs.isAcive) {
+                                btn.html("<i class='fa fa-check text-success'></i>");
+                                //$(this).find("i").removeClass("fas fa-times text-danger")
+                                //$(this).find("i").addClass("fa fa-check text-success");
+                            } else {
+                                btn.html("<i class='fas fa-times text-danger'></i>");
+                            }
                         }
-                    }
 
-                }
+                    }
+                });
             });
         });
     </script>
 }
-

@@ -183,3 +183,4 @@ D:\THỰC TẬP\WebOnl\WebOnl\bin\Microsoft.AspNetCore.Routing.dll
 D:\THỰC TẬP\WebOnl\WebOnl\bin\Microsoft.AspNetCore.Routing.xml
 D:\THỰC TẬP\WebOnl\WebOnl\bin\Microsoft.AspNetCore.Routing.Abstractions.xml
 D:\THỰC TẬP\WebOnl\WebOnl\obj\Debug\WebOnl.Migrations.UpdateActive.resources
+D:\THỰC TẬP\WebOnl\WebOnl\obj\Debug\WebOnl.Migrations.ChangeLenghtModels.resources

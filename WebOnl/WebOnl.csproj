@@ -291,6 +291,8 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -318,6 +320,18 @@
     <Compile Include="Migrations\202308041452476_ChangeLenghtModels.cs" />
     <Compile Include="Migrations\202308041452476_ChangeLenghtModels.Designer.cs">
       <DependentUpon>202308041452476_ChangeLenghtModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308061027589_UpdateProductCategory.cs" />
+    <Compile Include="Migrations\202308061027589_UpdateProductCategory.Designer.cs">
+      <DependentUpon>202308061027589_UpdateProductCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308110751229_Update1108.cs" />
+    <Compile Include="Migrations\202308110751229_Update1108.Designer.cs">
+      <DependentUpon>202308110751229_Update1108.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308111301211_UpdatePro.cs" />
+    <Compile Include="Migrations\202308111301211_UpdatePro.Designer.cs">
+      <DependentUpon>202308111301211_UpdatePro.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Common\Filter.cs" />
@@ -3133,6 +3147,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\autoNumeric-1.9.45.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -3238,6 +3253,10 @@
     <Content Include="Areas\Admin\Views\Posts\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Posts\Add.cshtml" />
     <Content Include="Areas\Admin\Views\Posts\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductCategory\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductCategory\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Add.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3300,6 +3319,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202308041452476_ChangeLenghtModels.resx">
       <DependentUpon>202308041452476_ChangeLenghtModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308061027589_UpdateProductCategory.resx">
+      <DependentUpon>202308061027589_UpdateProductCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308110751229_Update1108.resx">
+      <DependentUpon>202308110751229_Update1108.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308111301211_UpdatePro.resx">
+      <DependentUpon>202308111301211_UpdatePro.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -11,6 +11,12 @@ namespace WebOnl.Models.EF
     [Table("tb_Product")]
     public class Product : CommonAbstract
     {
+        public Product()
+        {
+            this.ProductImage = new HashSet<ProductImage>();
+            this.OrderDetails = new HashSet<OrderDetail>();
+        }
+
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -39,7 +45,8 @@ namespace WebOnl.Models.EF
         public bool IsFeature { get; set; }
         public bool IsHot { get; set; }
         public bool IsActive { get; set; }
-        public int CategoryId { get; set; }
+        public int ProductCategoryId { get; set; }
+
         [StringLength(250)]
         public string SeoTitle { get; set; }
 
